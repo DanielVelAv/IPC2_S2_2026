@@ -1,0 +1,23 @@
+body{
+    background-image: url("https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Zm9uZG8lMjBkZWwlMjBsaWJyb3xlbnwwfHwwfHx8MA%3D%3D");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#Has{
+    background-color: white;
+    width: 20em;
+    height: 15em;
+    padding: 2em;
+    font-family: Arial;
+    margin-left: 33em;
+    margin-top: 10em;
+}
+
+#btn{
+    background-color: black;
+    color: white;
+    width: 25em;
+    border-radius: 10px;
+    margin-top: 5px;
+}

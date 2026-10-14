@@ -1,0 +1,43 @@
+### =====================================================================
+###  Pruebas manuales de la API (igual que probarla con Postman).
+###  En Visual Studio o VS Code (extensión "REST Client") aparece un botón
+###  "Send Request" sobre cada petición. Primero ejecuta la API.
+### =====================================================================
+
+@api = http://localhost:5080
+
+### Verificar que la API está viva
+GET {{api}}/
+
+### Cargar diccionario (el contenido del XML va en el campo "archivoDicc")
+POST {{api}}/CargaArchivosConfiguracion
+Content-Type: application/x-www-form-urlencoded
+
+archivoDicc=<diccionario><sentimientos_positivos><palabra> bueno </palabra></sentimientos_positivos><sentimientos_negativos><palabra> malo </palabra></sentimientos_negativos></diccionario>
+
+### Cargar mensajes (el contenido del XML va en el campo "archivoMsg")
+POST {{api}}/entradaMensaje
+Content-Type: application/x-www-form-urlencoded
+
+archivoMsg=<?xml version="1.0"?><MENSAJES><MENSAJE><FECHA>Guatemala, 15/01/2023 15:25 hrs.</FECHA><TEXTO>Muy bueno @ana #usac#</TEXTO></MENSAJE></MENSAJES>
+
+### Hashtags en un rango de fechas
+POST {{api}}/devolverHastags
+Content-Type: application/x-www-form-urlencoded
+
+PrimerRango=2023-01-01&SegundoRango=2023-12-31
+
+### Menciones
+POST {{api}}/devolverMenciones
+Content-Type: application/x-www-form-urlencoded
+
+PrimerRango=2023-01-01&SegundoRango=2023-12-31
+
+### Sentimientos
+POST {{api}}/devolverSentimientos
+Content-Type: application/x-www-form-urlencoded
+
+PrimerRango=2023-01-01&SegundoRango=2023-12-31
+
+### Limpiar datos
+POST {{api}}/LimpiarDatos

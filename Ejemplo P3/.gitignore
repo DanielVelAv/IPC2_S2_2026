@@ -1,0 +1,4 @@
+# Las reglas generales de .NET (bin/, obj/, .vs/, etc.) están en el .gitignore de la raíz.
+
+# Datos generados por la API al ejecutarse (Bd.cs los crea si no existen)
+App_Data/

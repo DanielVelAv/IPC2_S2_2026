@@ -1,0 +1,31 @@
+@page
+@model IndexModel
+@* @page = esta página tiene URL propia · @model = su clase PageModel *@
+@{
+    ViewData["Title"] = "Proyecto 3 IPC2";
+}
+@* Rellena el hueco "Estilos" del layout con el CSS de esta página *@
+@section Estilos {
+    <link rel="stylesheet" href="~/css/StylePrincipal.css">
+}
+
+<center>
+    @* method="post" agrega solo el token de seguridad (no hace falta csrf_token) · multipart = para enviar archivos *@
+    <form method="post" enctype="multipart/form-data" id="frmA">
+        <p id="IAAS">Ingrese el archivo a Subir</p>
+        <input type="file" id="archivoMsg" name="archivoMsg" required><br><br>
+        <button type="submit" id="Ing">Ingresar</button>
+        <br><br>
+
+        @* Equivale a {{ fireworks | linebreaks }} *@
+        @if (Model.Fireworks != null)
+        {
+            <h1>
+                @foreach (var linea in Model.Fireworks.Split('\n'))
+                {
+                    @linea<br>
+                }
+            </h1>
+        }
+    </form>
+</center>

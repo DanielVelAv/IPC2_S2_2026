@@ -1,0 +1,21 @@
+@page
+@model ResetearDatosModel
+@* @page = esta página tiene URL propia · @model = su clase PageModel *@
+@{
+    ViewData["Title"] = "Resetear Datos";
+}
+@section Estilos {
+    <link rel="stylesheet" href="~/css/StylePrincipal.css">
+}
+
+<center>
+    <form method="post" id="frmA">
+        <p id="IAAS">Borrar todos los mensajes y el diccionario</p>
+        <button type="submit" id="Ing">Resetear</button>
+
+        @if (Model.Mensaje != null)
+        {
+            <p>@Model.Mensaje</p>
+        }
+    </form>
+</center>

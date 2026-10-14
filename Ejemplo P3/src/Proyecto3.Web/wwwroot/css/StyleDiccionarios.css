@@ -1,0 +1,34 @@
+body{
+    color: black;
+    font-family: Arial;
+    background-image: url("https://static.vecteezy.com/system/resources/previews/002/144/825/large_2x/wood-textures-background-free-photo.jpg");
+}
+
+
+#frmA{
+    color:darkgoldenrod;
+    background-color:moccasin;
+    height: 20em ;
+    width: 30em ;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    margin-top: 7em;
+}
+
+#IAAS{
+    margin-top: 2em;
+    font-size: 2em;
+}
+
+#Ing{
+    margin-top: 2em;
+    background-color:lightgoldenrodyellow;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    font-size: 1.25em;
+    padding-bottom: 1.5em;
+    padding-top: 0.50em;
+    width: 20em;
+    height: 1em;
+}

@@ -1,0 +1,15 @@
+body{
+    background-image: url("https://i.pinimg.com/originals/97/57/93/975793fff4eb682dcc396c2885a13f2f.jpg");
+    color:white;
+    font-family: "Arial";
+    align-content: center;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+#name{
+    margin-top: 8em;
+}

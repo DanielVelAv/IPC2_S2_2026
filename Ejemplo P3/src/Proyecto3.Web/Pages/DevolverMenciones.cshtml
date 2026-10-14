@@ -1,0 +1,49 @@
+@page
+@model DevolverMencionesModel
+@* @page = esta página tiene URL propia · @model = su clase PageModel *@
+@{
+    ViewData["Title"] = "Devolver Menciones";
+}
+@* Un @section no puede ir dentro de un if, pero un if sí puede ir dentro del @section *@
+@section Estilos {
+    @if (Model.Fechas == null)
+    {
+        <link rel="stylesheet" href="~/css/StyleDevolverH.css">
+    }
+    else
+    {
+        <link rel="stylesheet" href="~/css/StyleListados.css">
+    }
+}
+
+@if (Model.Fechas == null)
+{
+    @* ----- Formulario (ConsultarMenciones.html) ----- *@
+    //actions, si no esta va al mismo /Devolverhashtags
+    <form method="post" id="Has">
+        <center>
+            <h1>Devolver Menciones</h1>
+            <label><input type="date" id="PrimerRango" name="PrimerRango" required></label>
+            <label><input type="date" id="SegundoRango" name="SegundoRango" required></label><br><br>
+            <button type="submit" id="btn">Mostrar Datos</button>
+        </center>
+    </form>
+}
+else
+{
+    @* ----- Resultado (RecibeMenciones.html) ----- *@
+    <section id="contenido">
+        <center>
+            <h1>Listado de menciones Filtrado</h1>
+            @* var (fecha, hashtags) separa llave y valor, como .items() *@
+            @foreach (var (fecha, hashtags) in Model.Fechas)
+            {
+                <p id="fecha">****@fecha****</p>
+                @foreach (var hashta in hashtags)
+                {
+                    <p>@hashta</p>
+                }
+            }
+        </center>
+    </section>
+}

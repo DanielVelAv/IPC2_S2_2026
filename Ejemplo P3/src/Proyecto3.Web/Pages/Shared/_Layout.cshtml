@@ -1,0 +1,32 @@
+@* Layout: HTML compartido por todas las páginas *@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    @* Título que define cada página con ViewData["Title"] *@
+    <title>@ViewData["Title"]</title>
+    @* Hueco donde cada página pone su CSS (@section Estilos) *@
+    @RenderSection("Estilos", required: false)
+    <style>
+        /* Menú superior */
+        #menu { background-color: rgba(0, 0, 0, 0.75); padding: 10px; text-align: center; }
+        #menu a { color: white; margin: 0 10px; text-decoration: none; font-family: Arial; }
+        #menu a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    @* asp-page genera el href de cada página *@
+    <div id="menu">
+        <a asp-page="/Index">Cargar mensajes</a>
+        <a asp-page="/PedirDiccionario">Cargar diccionario</a>
+        <a asp-page="/DevolverHashtags">Hashtags</a>
+        <a asp-page="/DevolverMenciones">Menciones</a>
+        <a asp-page="/DevolverSentimientos">Sentimientos</a>
+        <a asp-page="/ResetearDatos">Resetear datos</a>
+        <a asp-page="/Ayuda">Ayuda</a>
+    </div>
+
+    @* Aquí se inserta el contenido de la página que se está viendo *@
+    @RenderBody()
+</body>
+</html>

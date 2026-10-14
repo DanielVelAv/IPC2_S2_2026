@@ -1,0 +1,15 @@
+body{
+    font-family: Arial;
+    background-image: url("https://static.vecteezy.com/system/resources/previews/002/937/835/non_2x/watercolor-sky-and-clouds-abstract-watercolor-background-free-vector.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#fecha{
+    font-weight: bold;
+}
+
+#contenido{
+    margin-top: 6em;
+    color: cornflowerblue;
+}
