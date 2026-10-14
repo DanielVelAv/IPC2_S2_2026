@@ -8,10 +8,6 @@ por rango de fechas:
 - cuántas palabras **positivas y negativas** tiene cada mensaje, según un diccionario
   que también se carga en XML.
 
-Es la traducción a C# de un proyecto hecho originalmente en Python: backend con **Flask** y
-frontend con **Django**. Se respetaron la misma lógica, los mismos nombres de clases y
-métodos y los mismos algoritmos, para que se pueda comparar cada archivo con su versión en Python.
-
 ---
 
 ## 1. Cómo ejecutarlo
@@ -19,7 +15,7 @@ métodos y los mismos algoritmos, para que se pueda comparar cada archivo con su
 **Requisito:** [.NET SDK 10](https://dotnet.microsoft.com/download).
 
 La aplicación son **dos programas** que deben correr al mismo tiempo. Abre dos terminales
-en la carpeta `Proyecto3.NET`:
+en la carpeta `Ejemplo P3`:
 
 ```bash
 # Terminal 1: backend (API) en http://localhost:5080
@@ -49,25 +45,25 @@ Para probar la API sola (como con Postman), usa
  ┌────────────┐  formularios  ┌─────────────────┐   HTTP (POST)   ┌─────────────────┐   lee/escribe   ┌────────────────────┐
  │ Navegador  │ ◀───────────▶ │ Proyecto3.Web   │ ◀─────────────▶ │ Proyecto3.Api   │ ◀─────────────▶ │ App_Data/          │
  │            │     HTML      │ Razor Pages     │      JSON       │ .NET            │                 │  db.xml            │
- └────────────┘               │ (antes Django)  │                 │ (antes Flask)   │                 │  dbDiccionario.xml │
-                              └─────────────────┘                 └─────────────────┘                 └────────────────────┘
+ └────────────┘               └─────────────────┘                 └─────────────────┘                 │  dbDiccionario.xml │
+                                                                                                      └────────────────────┘
 ```
 
 ---
 
-## 3. Cada archivo de Python y su equivalente en C#
+## 3. Archivos del proyecto
 
 ### Backend (`src/Proyecto3.Api`)
 
-| Python | C# | Qué hace |
-|---|---|---|
-| `app.py` | [`Program.cs`](src/Proyecto3.Api/Program.cs) | Define las rutas de la API |
-| `main.py` (clase `Bd`) | [`Bd.cs`](src/Proyecto3.Api/Bd.cs) | Guarda mensajes y diccionario en los XML; limpia los datos |
-| `ER.py` | [`ER.cs`](src/Proyecto3.Api/ER.cs) | Lee los XML y analiza cada mensaje carácter por carácter |
-| `GETS.py` | [`GETS.cs`](src/Proyecto3.Api/GETS.cs) | Clases `Hastags`, `Menciones` y `Sentimientos`: filtran por fecha |
-| librería `unidecode` | [`Unidecode.cs`](src/Proyecto3.Api/Unidecode.cs) | Quita tildes |
+| Archivo | Qué hace |
+|---|---|
+| [`Program.cs`](src/Proyecto3.Api/Program.cs) | Define las rutas de la API |
+| [`Bd.cs`](src/Proyecto3.Api/Bd.cs) | Guarda mensajes y diccionario en los XML; limpia los datos |
+| [`ER.cs`](src/Proyecto3.Api/ER.cs) | Lee los XML y analiza cada mensaje carácter por carácter |
+| [`GETS.cs`](src/Proyecto3.Api/GETS.cs) | Clases `Hastags`, `Menciones` y `Sentimientos`: filtran por fecha |
+| [`Unidecode.cs`](src/Proyecto3.Api/Unidecode.cs) | Quita tildes |
 
-**Rutas de la API** (las mismas que en Flask):
+**Rutas de la API:**
 
 | Ruta | Campos del formulario | Respuesta |
 |---|---|---|
@@ -81,56 +77,26 @@ Para probar la API sola (como con Postman), usa
 
 ### Frontend (`src/Proyecto3.Web`)
 
-| Django | Razor Pages | URL |
+| Página | URL | Qué hace |
 |---|---|---|
-| `settings.py` + `urls.py` | [`Program.cs`](src/Proyecto3.Web/Program.cs) | — |
-| `pedirEntrada` + `Principal.html` | [`Pages/Index`](src/Proyecto3.Web/Pages/Index.cshtml.cs) | `/` |
-| `pedirDiccionario` + `EnviarDiccionarios.html` | [`Pages/PedirDiccionario`](src/Proyecto3.Web/Pages/PedirDiccionario.cshtml.cs) | `/PedirDiccionario` |
-| `resetearDatos` + `ResetearDatos.html` | [`Pages/ResetearDatos`](src/Proyecto3.Web/Pages/ResetearDatos.cshtml.cs) | `/ResetearDatos` |
-| `consultarHashtags` + `DevolverHashtags.html` / `RecibeHashtags.html` | [`Pages/DevolverHashtags`](src/Proyecto3.Web/Pages/DevolverHashtags.cshtml.cs) | `/DevolverHashtags` |
-| `consultarMenciones` + `ConsultarMenciones.html` / `RecibeMenciones.html` | [`Pages/DevolverMenciones`](src/Proyecto3.Web/Pages/DevolverMenciones.cshtml.cs) | `/DevolverMenciones` |
-| `consultarSentimientos` + `ConsultarSentimientos.html` / `RecibeSentimientos.html` | [`Pages/DevolverSentimientos`](src/Proyecto3.Web/Pages/DevolverSentimientos.cshtml.cs) | `/DevolverSentimientos` |
-| `ayuda` + `ayuda.html` | [`Pages/Ayuda.cshtml`](src/Proyecto3.Web/Pages/Ayuda.cshtml) | `/Ayuda` |
-| carpeta `static/` | `wwwroot/css/` (los mismos CSS) | `/css/...` |
+| [`Program.cs`](src/Proyecto3.Web/Program.cs) | — | Configuración del sitio |
+| [`Pages/Index`](src/Proyecto3.Web/Pages/Index.cshtml.cs) | `/` | Carga el XML de mensajes |
+| [`Pages/PedirDiccionario`](src/Proyecto3.Web/Pages/PedirDiccionario.cshtml.cs) | `/PedirDiccionario` | Carga el XML del diccionario |
+| [`Pages/ResetearDatos`](src/Proyecto3.Web/Pages/ResetearDatos.cshtml.cs) | `/ResetearDatos` | Borra los datos guardados |
+| [`Pages/DevolverHashtags`](src/Proyecto3.Web/Pages/DevolverHashtags.cshtml.cs) | `/DevolverHashtags` | Consulta hashtags por fecha |
+| [`Pages/DevolverMenciones`](src/Proyecto3.Web/Pages/DevolverMenciones.cshtml.cs) | `/DevolverMenciones` | Consulta menciones por fecha |
+| [`Pages/DevolverSentimientos`](src/Proyecto3.Web/Pages/DevolverSentimientos.cshtml.cs) | `/DevolverSentimientos` | Consulta sentimientos por fecha |
+| [`Pages/Ayuda.cshtml`](src/Proyecto3.Web/Pages/Ayuda.cshtml) | `/Ayuda` | Página de ayuda |
+| `wwwroot/css/` | `/css/...` | Hojas de estilo |
 
 ---
 
-## 4. Equivalencias de Python a C#
-
-| Python | C# |
-|---|---|
-| `@app.route('/x', methods=['POST'])` | `app.MapPost("/x", ...)` |
-| `request.form['PrimerRango']` | parámetro `[FromForm] string PrimerRango` |
-| `jsonify({...})` | `Results.Json(new { ... })` |
-| `send_file(ruta)` | `Results.File(ruta, "application/xml")` |
-| `ET.parse(ruta).getroot()` | `XDocument.Load(ruta).Root` |
-| `ET.fromstring(texto)` | `XDocument.Parse(texto).Root` |
-| `raiz.findall('MENSAJE')` | `raiz.Elements("MENSAJE")` |
-| `elemento.text` | `elemento.Value` |
-| `ET.Element("palabra")` + `.text = x` | `new XElement("palabra", x)` |
-| `padre.append(hijo)` / `arbol.write(ruta)` | `padre.Add(hijo)` / `documento.Save(ruta)` |
-| `open(ruta).read()` | `File.ReadAllText(ruta)` |
-| `open(ruta, 'w').write(x)` | `File.WriteAllText(ruta, x)` |
-| `texto[a:b]` | `texto.Substring(a, b - a)` |
-| `texto.find('#', j)` (devuelve -1) | `texto.IndexOf('#', j)` (devuelve -1) |
-| `c.isalpha()` / `c.isdigit()` | `char.IsLetter(c)` / `char.IsDigit(c)` |
-| `s.strip()` / `s.lower()` | `s.Trim()` / `s.ToLower()` |
-| `lista = []` / `lista.append(x)` | `var lista = new List<string>();` / `lista.Add(x)` |
-| `dicc = {}` / `x in dicc` | `new Dictionary<string, string>()` / `dicc.ContainsKey(x)` |
-| `len(lista)` / `len(texto)` | `lista.Count` / `texto.Length` |
-| `return a, b` | `return (a, b);` (tupla) |
-| `time.strptime(s, '%d/%m/%Y')` | `DateTime.ParseExact(s, "dd/MM/yyyy", CultureInfo.InvariantCulture)` |
-| `self.atributo` | `this.atributo` (o solo `atributo`) |
-| `def __init__(self, x):` | constructor `public Clase(string x) { ... }` |
-
----
-
-## 5. Cómo funciona una página de Razor Pages
+## 4. Cómo funciona una página de Razor Pages
 
 Cada página tiene **dos archivos**:
 
-- **`Pagina.cshtml`**: el HTML, como un template de Django.
-- **`Pagina.cshtml.cs`**: una clase con la lógica, como la función de `view.py`.
+- **`Pagina.cshtml`**: el HTML de la página.
+- **`Pagina.cshtml.cs`**: una clase con la lógica que se ejecuta al abrir o enviar la página.
 
 ```csharp
 public class DevolverHashtagsModel : PageModel
@@ -146,18 +112,18 @@ public class DevolverHashtagsModel : PageModel
 }
 ```
 
-| Django | Razor Pages |
+| Concepto | En Razor Pages |
 |---|---|
-| `if request.method == 'POST':` | métodos separados `OnGet()` y `OnPost()` / `OnPostAsync()` |
-| `request.POST['PrimerRango']` | parámetro `string PrimerRango` (mismo nombre que el `<input name>`) |
-| `request.FILES['archivoMsg']` | parámetro `IFormFile archivoMsg` |
-| `loader.get_template(...).render({'fechas': x})` | propiedad `Fechas`, leída en el HTML como `Model.Fechas` |
-| `{{ fecha }}` | `@fecha` |
-| `{% for fecha, lista in fechas.items %}` | `@foreach (var (fecha, lista) in Model.Fechas)` |
-| `{% if x %}` | `@if (x) { }` |
-| `{% csrf_token %}` / `@csrf_exempt` | automático en todo `<form method="post">` |
-| `{% static 'x.css' %}` | `~/css/x.css` |
-| HTML repetido en cada template | `Shared/_Layout.cshtml` + `@RenderBody()` |
+| Distinguir GET de POST | métodos separados `OnGet()` y `OnPost()` / `OnPostAsync()` |
+| Leer un campo del formulario | parámetro `string PrimerRango` (mismo nombre que el `<input name>`) |
+| Recibir un archivo | parámetro `IFormFile archivoMsg` |
+| Pasar datos al HTML | propiedad `Fechas`, leída en el HTML como `Model.Fechas` |
+| Mostrar un valor | `@fecha` |
+| Recorrer una colección | `@foreach (var (fecha, lista) in Model.Fechas)` |
+| Condicional | `@if (x) { }` |
+| Protección CSRF | automática en todo `<form method="post">` |
+| Enlazar un CSS | `~/css/x.css` |
+| HTML compartido entre páginas | `Shared/_Layout.cshtml` + `@RenderBody()` |
 
 Archivos especiales de la carpeta `Pages/`:
 
